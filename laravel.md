@@ -55,3 +55,9 @@ Migrated:  2014_10_12_000000_create_users_table
 Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
+
+###コントローラ
+```
+K:\larablog>php artisan make:controller AdminController
+Controller created successfully.
+```
