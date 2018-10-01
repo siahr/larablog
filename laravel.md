@@ -17,6 +17,7 @@
 K:\larablog>composer require barryvdh/laravel-ide-helper
 ```
 
+config/app.php
 ```
     'providers' => [
 
