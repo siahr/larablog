@@ -1,16 +1,16 @@
 ### プロジェクトの作成
  * ``` laravel new larablog ```
  
-    or
+     or
  * ``` composer create-project laravel/laravel larablog --prefer-dist ```
  
 ### route
  * larablog/routes/web.php
-    ``` 
-        Route::get('/', function () {
-                return view('welcome');
-        });
-    ``` 
+``` 
+    Route::get('/', function () {
+            return view('welcome');
+    });
+``` 
 ### IDE
 
 ```
