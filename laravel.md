@@ -1,10 +1,10 @@
-### プロジェクトの作成
+## プロジェクトの作成
  * ``` laravel new larablog ```
  
      or
  * ``` composer create-project laravel/laravel larablog --prefer-dist ```
  
-### route
+## route
  * larablog/routes/web.php
 ``` 
     Route::get('/', function () {
@@ -15,7 +15,7 @@
     Route::get('article','ArticleController@index');
     
 ``` 
-### IDE
+## IDE
 
 ```
 K:\larablog>composer require barryvdh/laravel-ide-helper
@@ -46,7 +46,7 @@ config/app.php
 K:\larablog>php artisan ide-helper:generate
 
 ```
-###Auth
+##Auth
 ```
 K:\larablog>php artisan make:auth
 Authentication scaffolding generated successfully.
@@ -60,19 +60,19 @@ Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
 
-###コントローラ
+##コントローラ
 ```
 K:\larablog>php artisan make:controller AdminController
 Controller created successfully.
 ```
 
-###モデル
+##モデル
 ```
 K:\larablog>php artisan make:model Article
 Model created successfully.
 ```
 
-###npm
+##npm
 Node.js をインストールしておく
 
 ``` npm install ```
@@ -100,7 +100,7 @@ resources/sass/app.scss に
 ``` npm run prod ```
 
 
-###DebugBar
+##DebugBar
 
 ```
 K:\larablog>composer require barryvdh/laravel-debugbar
@@ -158,3 +158,101 @@ DEBUGBAR_ENABLED=null
     }
 ```
 
+##サービスプロバイダー
+```
+mkdir app/Facades
+mkdir app/Libraries
+```
+```
+K:\larablog>php artisan make:provider LoggingServiceProvider
+Provider created successfully.
+```
+app/Probiders/LoggingServiceProvider.php
+```
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class LoggingServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bind(
+            'logger',
+            'App\Libraries\Logger'
+        );
+    }
+}
+```
+
+app/Facades/Logger.php
+```
+<?php
+
+namespace App\Facades;
+
+use Illuminate\Support\Facades\Facade;
+
+class Logger extends Facade
+{
+    protected static function getFacadeAccessor(){
+        return 'logger';
+    }
+
+}
+
+```
+
+app/Libraries/Logger.php
+```
+<?php
+
+namespace App\Libraries;
+
+use Log;
+
+class Logger
+{
+    public static function debug($message, array $context = array())
+    {
+        Log::info($message);
+    }
+
+    public static function info($message, array $context = array())
+    {
+        Log::info($message);
+    }
+}
+
+```
+
+
+config/app.php
+```
+'providers'=>[
+...
+         App\Providers\LoggingServiceProvider::class,
+...
+]
+
+'aliases'=>[
+...
+        'Logger' => App\Facades\Logger::class,
+...
+]
+```

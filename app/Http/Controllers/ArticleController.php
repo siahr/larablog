@@ -10,9 +10,10 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-        \Debugbar::debug($request);
+        \Logger::info("test");
+        \Logger::debug($request->request);
         $articles = Article::all();
-        \Debugbar::info($articles);
+        \Logger::info($articles);
         return view("article.index", ["articles" => $articles]);
     }
 }

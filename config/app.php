@@ -161,6 +161,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        App\Providers\LoggingServiceProvider::class,
     ],
 
     /*
@@ -210,6 +212,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        'Logger' => App\Facades\Logger::class,
     ],
 
 ];
