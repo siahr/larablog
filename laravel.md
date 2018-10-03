@@ -61,3 +61,36 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 K:\larablog>php artisan make:controller AdminController
 Controller created successfully.
 ```
+
+###モデル
+```
+K:\larablog>php artisan make:model Article
+Model created successfully.
+```
+
+###npm
+Node.js をインストールしておく
+
+``` npm install ```
+
+``` npm run dev ```
+
+dataTables を追加してみる （https://datatables.net/download/npm）
+
+``` npm install datatables.net ```
+
+``` npm install datatables.net-dt ```
+
+resouces/js/app.js に
+``` 
+require('datatables.net');
+``` 
+
+resources/sass/app.scss に
+```
+@import url('https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css');
+```
+
+最後に
+
+``` npm run prod ```
