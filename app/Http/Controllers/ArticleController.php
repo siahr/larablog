@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        \Debugbar::debug($request);
         $articles = Article::all();
+        \Debugbar::info($articles);
         return view("article.index", ["articles" => $articles]);
     }
 }

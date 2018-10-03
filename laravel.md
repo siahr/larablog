@@ -98,3 +98,63 @@ resources/sass/app.scss に
 最後に
 
 ``` npm run prod ```
+
+
+###DebugBar
+
+```
+K:\larablog>composer require barryvdh/laravel-debugbar
+Using version ^3.2 for barryvdh/laravel-debugbar
+./composer.json has been updated
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 2 installs, 0 updates, 0 removals
+  - Installing maximebf/debugbar (v1.15.0): Downloading (100%)
+  - Installing barryvdh/laravel-debugbar (v3.2.0): Downloading (100%)
+maximebf/debugbar suggests installing kriswallsmith/assetic (The best way to manage assets)
+maximebf/debugbar suggests installing predis/predis (Redis storage)
+Writing lock file
+Generating optimized autoload files
+> Illuminate\Foundation\ComposerScripts::postAutoloadDump
+> @php artisan package:discover --ansi
+Discovered Package: barryvdh/laravel-debugbar
+Discovered Package: barryvdh/laravel-ide-helper
+Discovered Package: beyondcode/laravel-dump-server
+Discovered Package: fideloper/proxy
+Discovered Package: laravel/tinker
+Discovered Package: nesbot/carbon
+Discovered Package: nunomaduro/collision
+Package manifest generated successfully.
+```
+config/app.php
+```
+    'providers' => [
++       Barryvdh\Debugbar\ServiceProvider::class,
+    ],
+
+    'aliases' => [
++       'Debugbar' => Barryvdh\Debugbar\Facade::class,
+    ]
+```
+
+```
+K:\larablog>php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+Copied File [\vendor\barryvdh\laravel-debugbar\config\debugbar.php] To [\config\debugbar.php]
+Publishing complete.
+```
+
+.env に
+```
+DEBUGBAR_ENABLED=null
+```
+
+こんな感じでメッセージング
+```
+    public function index(Request $request)
+    {
+        $articles = Article::all();
+        \Debugbar::info($request);
+        return view("article.index", ["articles" => $articles]);
+    }
+```
+
