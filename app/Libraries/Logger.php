@@ -10,7 +10,6 @@ class Logger
         return print_r($message, true);
     }
 
-
     public static function debug($message, array $context = array())
     {
         Log::debug(self::logging($message), $context);
